@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Dayana 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fdf2f8; /* Fondo rosa muy claro */
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Contenedor de la pregunta inicial */
+        #question-container {
+            transition: opacity 0.5s ease;
+        }
+
+        h1 {
+            color: #4a0072;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #btn-yes {
+            background-color: #8e44ad;
+        }
+        #btn-yes:hover {
+            background-color: #732d91;
+            transform: scale(1.05);
+        }
+
+        #btn-no {
+            background-color: #95a5a6;
+        }
+
+        /* Contenedor de la animación (oculto al inicio) */
+        #animation-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        /* Textos finales */
+        .te-amo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #8e44ad; /* Morado */
+            margin: 10px 0 0 0;
+            opacity: 0;
+            animation: fadeInText 2s ease forwards;
+            animation-delay: 3s; /* Aparece después de dibujar la flor */
+        }
+
+        .para-dayana {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            margin-top: 5px;
+            opacity: 0;
+            animation: fadeInText 2s ease forwards;
+            animation-delay: 4.5s; /* Aparece al último */
+        }
+
+        /* Animación del SVG del Lirio */
+        svg {
+            width: 250px;
+            height: 250px;
+        }
+
+        .draw-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawFlower 4s ease-in-out forwards;
+        }
+        
+        .draw-path-delay {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawFlower 3s ease-in-out forwards;
+            animation-delay: 1.5s;
+        }
+
+        .fill-petal {
+            opacity: 0;
+            animation: fillPurple 2s ease forwards;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes drawFlower {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes fillPurple {
+            to { opacity: 0.4; }
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla Inicial -->
+    <div id="question-container">
+        <h1>¿Me amas?</h1>
+        <div class="btn-group">
+            <button id="btn-yes">Sí</button>
+            <button id="btn-no">No</button>
+        </div>
+    </div>
+
+    <!-- Pantalla del Lirio -->
+    <div id="animation-container">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Tallo -->
+            <path class="draw-path" d="M100,180 Q90,130 100,90" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+            <!-- Hoja -->
+            <path class="draw-path-delay" d="M100,140 Q130,150 140,110 Q120,130 100,140" fill="none" stroke="#27ae60" stroke-width="3"/>
+            <!-- Pétalos del Lirio (Morados) -->
+            <!-- Pétalo izquierdo -->
+            <path class="draw-path fill-petal" d="M100,90 Q60,70 50,20 Q80,40 100,90" fill="#9b59b6" stroke="#8e44ad" stroke-width="3"/>
+            <!-- Pétalo derecho -->
+            <path class="draw-path fill-petal" d="M100,90 Q140,70 150,20 Q120,40 100,90" fill="#9b59b6" stroke="#8e44ad" stroke-width="3"/>
+            <!-- Pétalo central -->
+            <path class="draw-path fill-petal" d="M100,90 Q85,50 100,10 Q115,50 100,90" fill="#9b59b6" stroke="#8e44ad" stroke-width="3"/>
+            <!-- Estambres (Amarillos) -->
+            <path class="draw-path-delay" d="M100,90 Q90,50 90,40" fill="none" stroke="#f1c40f" stroke-width="2" stroke-linecap="round"/>
+            <path class="draw-path-delay" d="M100,90 Q110,50 110,40" fill="none" stroke="#f1c40f" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+
+        <h2 class="te-amo">Te amo</h2>
+        <p class="para-dayana">Para Dayana</p>
+    </div>
+
+    <script>
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+        const questionContainer = document.getElementById('question-container');
+        const animationContainer = document.getElementById('animation-container');
+
+        // Función para iniciar la animación
+        function showFlower() {
+            questionContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                questionContainer.style.display = 'none';
+                animationContainer.style.display = 'flex';
+                
+                // Pequeño retraso para que el navegador renderice el display:flex antes de cambiar la opacidad
+                setTimeout(() => {
+                    animationContainer.style.opacity = '1';
+                }, 50);
+            }, 500);
+        }
+
+        // Evento para el botón "Sí"
+        btnYes.addEventListener('click', showFlower);
+
+        // Evento para el botón "No"
+        btnNo.addEventListener('click', function() {
+            // Transformar el botón "No" en un botón "Sí"
+            btnNo.innerText = 'Sí';
+            btnNo.style.backgroundColor = '#8e44ad'; // Mismo color morado
+            btnNo.style.transform = 'scale(1.05)';
+            
+            // Esperar medio segundo para que vea el cambio, y luego lanzar la animación
+            setTimeout(showFlower, 600);
+        });
+    </script>
+</body>
+</html>
